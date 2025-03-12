@@ -27,7 +27,7 @@ export default function Privacy() {
                 </div>
 
                 <div className="space-y-6">
-                    <p className="text-secondary text-sm mb-6">
+                    <p className=" text-sm mb-6">
                         T-Project（以下「運営」）は、参加者の個人情報の取り扱いについて、以下のとおりプライバシーポリシー（以下「本ポリシー」）を定めます。
                     </p>
 
@@ -125,7 +125,7 @@ export default function Privacy() {
                         </p>
                     </section>
 
-                    <div className="mt-8 text-center text-sm text-secondary">
+                    <div className="mt-8 text-center text-sm">
                         2025年2月6日 制定
                     </div>
                 </div>

@@ -95,7 +95,7 @@ export default function ApplicationForm() {
         <div className="max-w-2xl mx-auto bg-white p-6 md:p-8 rounded-lg shadow-lg">
             <div className="mb-6">
                 <h1 className="text-2xl font-bold text-center">ステラフィルワールド参加応募フォーム</h1>
-                <p className="mt-2 text-center text-secondary">
+                <p className="mt-2 text-center">
                     以下のフォームに必要事項を入力して応募してください。<span className="text-red-500">*</span> は必須項目です。
                 </p>
             </div>

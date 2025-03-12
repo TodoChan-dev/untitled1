@@ -59,7 +59,7 @@ export default function Header() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5, staggerChildren: 0.1, delayChildren: 0.2 }}
                     >
-                        {['ホーム', '応募フォーム', '利用規約'].map((item, index) => (
+                        {['ホーム', '応募フォーム', '利用規約', '審査状況'].map((item, index) => (
                             <motion.li
                                 key={item}
                                 initial={{ opacity: 0, y: -10 }}
@@ -67,7 +67,7 @@ export default function Header() {
                                 transition={{ duration: 0.3, delay: 0.1 * index }}
                             >
                                 <Link
-                                    href={index === 0 ? '/' : index === 1 ? '/apply' : '/terms'}
+                                    href={index === 0 ? '/' : index === 1 ? '/apply' : index === 2 ?'/terms' : '/check-status'}
                                     className="py-2 relative group"
                                 >
                                     <span className="text-gray-800 group-hover:text-primary-600 transition-colors">{item}</span>
