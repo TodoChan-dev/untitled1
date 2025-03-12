@@ -46,101 +46,183 @@ export async function sendConfirmationEmail(
             subject: '【ステラフィルワールド】応募ありがとうございます',
             html: `
             <!DOCTYPE html>
-            <html lang="ja">
-            <head>
-                <meta charset="UTF-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>ステラフィルワールド応募確認</title>
-                <style>
-                    body {
-                        font-family: 'Helvetica Neue', Arial, sans-serif;
-                        line-height: 1.6;
-                        color: #333;
-                        max-width: 600px;
-                        margin: 0 auto;
-                        padding: 20px;
-                    }
-                    .container {
-                        background-color: #ffffff;
-                        border-radius: 8px;
-                        padding: 30px;
-                        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-                    }
-                    .header {
-                        text-align: center;
-                        margin-bottom: 30px;
-                    }
-                    .logo {
-                        max-width: 150px;
-                        margin-bottom: 20px;
-                    }
-                    h1 {
-                        color: #4a5568;
-                        font-size: 24px;
-                        margin-bottom: 20px;
-                    }
-                    .verification-code {
-                        background-color: #f7fafc;
-                        border: 1px solid #e2e8f0;
-                        border-radius: 6px;
-                        padding: 15px;
-                        margin: 20px 0;
-                        text-align: center;
-                        font-size: 24px;
-                        letter-spacing: 2px;
-                        font-weight: bold;
-                        color: #4a5568;
-                    }
-                    .button {
-                        display: inline-block;
-                        background-color: #4f46e5;
-                        color: white;
-                        text-decoration: none;
-                        padding: 12px 24px;
-                        border-radius: 4px;
-                        font-weight: bold;
-                        margin: 20px 0;
-                    }
-                    .footer {
-                        margin-top: 30px;
-                        text-align: center;
-                        font-size: 12px;
-                        color: #718096;
-                    }
-                </style>
-            </head>
-            <body>
-                <div class="container">
-                    <div class="header">
-                        <h1>ステラフィルワールド 応募確認</h1>
-                    </div>
-                    
-                    <p>${name} 様</p>
-                    
-                    <p>この度はステラフィルワールドへご応募いただき、誠にありがとうございます。</p>
-                    
-                    <p>応募内容を確認の上、審査を行います。審査結果は追ってご連絡いたします。</p>
-                    
-                    <p>下記の認証コードは、応募状況を確認する際に必要となります。大切に保管してください。</p>
-                    
-                    <div class="verification-code">${verificationCode}</div>
-                    
-                    <p><strong>審査状況の確認方法：</strong><br>
-                    <a href="${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/check-status" class="button">審査状況を確認する</a></p>
-                    
-                    <p>なお、Discord上でもご連絡することがございますので、以下のユーザーからのフレンド申請をご確認ください。</p>
-                    <p>Discord: <strong>todomen</strong></p>
-                    
-                    <p>ご不明な点がございましたら、本メールに返信いただくか、Discordでお問い合わせください。</p>
-                    
-                    <p>引き続きよろしくお願いいたします。</p>
-                    
-                    <div class="footer">
-                        <p>--<br>ステラフィルワールド運営チーム<br>T-Project</p>
-                    </div>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ステラフィルワールド応募確認</title>
+    <style>
+        /* メールクライアント互換性を考慮したリセットCSS */
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+        }
+
+        /* メインコンテナ */
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #f8f9ff;
+        }
+
+        .content-wrapper {
+            padding: 40px 20px;
+            background-color: #ffffff;
+        }
+
+        /* ヘッダー */
+        .header {
+            background: linear-gradient(135deg, #4f46e5, #3b82f6);
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            color: #ffffff;
+            font-size: 24px;
+            margin: 0;
+            font-weight: bold;
+        }
+
+        /* コンテンツ領域 */
+        .content {
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 認証コード */
+        .verification-code {
+            background-color: #f0f7ff;
+            border: 2px solid #e0e7ff;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 25px 0;
+            text-align: center;
+        }
+
+        .verification-code-text {
+            font-family: monaco, monospace;
+            font-size: 28px;
+            font-weight: bold;
+            color: #4f46e5;
+            letter-spacing: 3px;
+        }
+
+        /* ボタン */
+        .button-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .button {
+            display: inline-block;
+            background-color: #4f46e5;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 14px 28px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        /* テキスト */
+        .text {
+            margin: 16px 0;
+            color: #1a1a1a;
+        }
+
+        /* フッター */
+        .footer {
+            text-align: center;
+            padding: 30px 20px;
+            background-color: #f8f9ff;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .footer-text {
+            color: #6b7280;
+            font-size: 14px;
+            margin: 5px 0;
+        }
+
+        /* レスポンシブ対応 */
+        @media screen and (max-width: 600px) {
+            .content {
+                padding: 20px;
+            }
+
+            .verification-code {
+                padding: 15px;
+            }
+
+            .verification-code-text {
+                font-size: 24px;
+            }
+
+            .button {
+                display: block;
+                margin: 0 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <div class="header">
+            <h1>ステラフィルワールド 応募確認</h1>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="content">
+                <p class="text"><strong>${name}</strong> 様</p>
+
+                <p class="text">
+                    この度はステラフィルワールドへご応募いただき、誠にありがとうございます。
+                </p>
+
+                <p class="text">
+                    応募内容を確認の上、審査を行います。審査結果は追ってご連絡いたします。
+                </p>
+
+                <p class="text">
+                    下記の認証コードは、応募状況を確認する際に必要となります。大切に保管してください。
+                </p>
+
+                <div class="verification-code">
+                    <div class="verification-code-text">${verificationCode}</div>
                 </div>
-            </body>
-            </html>
+
+                <p class="text"><strong>審査状況の確認方法：</strong></p>
+                
+                <div class="button-container">
+                    <a href="${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/check-status" class="button">
+                        審査状況を確認する
+                    </a>
+                </div>
+
+                <p class="text">
+                    ご不明な点がございましたら、本メールに返信いただくか、Discordでお問い合わせください。
+                </p>
+
+                <p class="text">
+                    引き続きよろしくお願いいたします。
+                </p>
+            </div>
+
+            <div class="footer">
+                <p class="footer-text">ステラフィルワールド運営チーム</p>
+                <p class="footer-text">T-Project</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
             `,
         });
         return true;

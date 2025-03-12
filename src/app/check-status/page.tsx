@@ -12,6 +12,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { ApplicationStatus } from '@prisma/client';
 
+
 // フォームのバリデーションスキーマ
 const checkStatusSchema = z.object({
     email: z.string().email({ message: '有効なメールアドレスを入力してください' }),
@@ -19,6 +20,7 @@ const checkStatusSchema = z.object({
 });
 
 type FormValues = z.infer<typeof checkStatusSchema>;
+
 
 type ApplicationResult = {
     id: number;
