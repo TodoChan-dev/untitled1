@@ -27,7 +27,9 @@ export default function Header() {
     return (
         <header
             className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-                scrolled ? 'bg-card py-3 backdrop-blur-md' : 'bg-transparent py-5'
+                scrolled
+                    ? 'bg-white bg-opacity-80 backdrop-blur-md py-3 shadow-md'
+                    : 'bg-white py-5'
             }`}
         >
             <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 flex justify-between items-center">
@@ -40,7 +42,7 @@ export default function Header() {
                         <Star className="h-6 w-6 animate-pulse-glow text-primary-400" />
                     </motion.div>
                     <motion.span
-                        className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary-300 to-accent"
+                        className="text-xl font-bold text-gray-800" // テキストカラーを黒に変更
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ duration: 0.8 }}
@@ -68,7 +70,7 @@ export default function Header() {
                                     href={index === 0 ? '/' : index === 1 ? '/apply' : '/terms'}
                                     className="py-2 relative group"
                                 >
-                                    <span className="text-foreground/90 group-hover:text-primary-300 transition-colors">{item}</span>
+                                    <span className="text-gray-800 group-hover:text-primary-600 transition-colors">{item}</span>
                                     <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary-400 group-hover:w-full transition-all duration-300"></span>
                                 </Link>
                             </motion.li>
@@ -78,7 +80,7 @@ export default function Header() {
 
                 {/* Mobile Menu Button */}
                 <motion.button
-                    className="md:hidden z-10 text-foreground/90 hover:text-primary-300 transition-colors"
+                    className="md:hidden z-10 text-gray-800 hover:text-primary-600 transition-colors"
                     onClick={() => setIsMenuOpen(!isMenuOpen)}
                     aria-label="Toggle menu"
                     whileTap={{ scale: 0.9 }}
@@ -89,7 +91,7 @@ export default function Header() {
                 {/* Mobile Navigation */}
                 {isMenuOpen && (
                     <motion.div
-                        className="fixed inset-0 glass z-40 flex items-center justify-center"
+                        className="fixed inset-0 bg-white z-40 flex items-center justify-center"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
@@ -115,7 +117,7 @@ export default function Header() {
                                     >
                                         <Link
                                             href={item.href}
-                                            className="text-xl font-medium text-foreground/90 hover:text-primary-300 transition-colors"
+                                            className="text-xl font-medium text-gray-800 hover:text-primary-600 transition-colors"
                                             onClick={() => setIsMenuOpen(false)}
                                         >
                                             {item.name}

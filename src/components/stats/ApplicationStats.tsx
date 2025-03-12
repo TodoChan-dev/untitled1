@@ -48,7 +48,7 @@ export default function ApplicationStats() {
             <h2 className="text-xl font-bold mb-6 text-center text-glow">
                 <div className="flex items-center justify-center">
                     <Star className="mr-2 h-5 w-5 text-primary-300 animate-pulse-glow" />
-                    <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary-100 to-primary-400">
+                    <span className="bg-clip-text text-transparent bg-gradient-to-r from-slate-950 to-slate-900">
             現在の応募状況
           </span>
                 </div>
@@ -69,7 +69,7 @@ export default function ApplicationStats() {
                         <p className="text-sm text-foreground/70 mb-2">総応募数</p>
                         <div className="flex items-center justify-center">
                             <Users className="text-primary-300 h-6 w-6 mr-2" />
-                            <span className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-primary-200">
+                            <span className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-slate-950 to-slate-900">
                 {stats.totalApplications}
               </span>
                         </div>
@@ -84,7 +84,7 @@ export default function ApplicationStats() {
                         <p className="text-sm text-foreground/70 mb-2">参加決定者数</p>
                         <div className="flex items-center justify-center">
                             <UserCheck className="text-accent h-6 w-6 mr-2" />
-                            <span className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-accent">
+                            <span className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-slate-950 to-slate-900">
                 {stats.acceptedApplications}
               </span>
                         </div>

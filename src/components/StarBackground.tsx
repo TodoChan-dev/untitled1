@@ -11,6 +11,9 @@ const StarBackground = () => {
 
         // Three.jsシーンのセットアップ
         const scene = new THREE.Scene();
+        // 背景色を黒に設定（この行を追加）
+        scene.background = new THREE.Color(0x000914);
+
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 
         const renderer = new THREE.WebGLRenderer({

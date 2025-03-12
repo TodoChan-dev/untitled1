@@ -49,17 +49,18 @@ export async function POST(request: NextRequest) {
             );
         }
 
-        // データベースに保存
+        // データベースに保存（verificationCodeも生成される）
         const application = await saveApplication(data);
 
         // Discord Webhookに通知
         await sendDiscordWebhook(data);
 
-        // 確認メール送信
+        // 確認メール送信 - 新しいverificationCodeパラメータを追加
         await sendConfirmationEmail(
             data.email,
             data.name,
-            data.discordUsername
+            data.discordUsername,
+            application.verificationCode // 追加：保存時に生成された認証コード
         );
 
         return NextResponse.json(
