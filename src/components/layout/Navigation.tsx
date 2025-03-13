@@ -1,23 +1,48 @@
-// src/components/layout/Navigation.tsx
 import Link from 'next/link';
-import { useState } from 'react';
-import { Menu, X } from 'lucide-react';
+import {useState, useEffect} from 'react';
+import {Menu, X} from 'lucide-react';
+import {motion} from 'framer-motion';
 
 export default function Navigation() {
     const [isOpen, setIsOpen] = useState(false);
+
+    const menuVariants = {
+        hidden: {opacity: 0, y: "-100%"},
+        visible: {opacity: 1, y: "0"},
+        exit: {opacity: 0, y: "-100%"},
+    };
+
+    useEffect(() => {
+        if (isOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
+
+        return () => {
+            document.body.style.overflow = '';
+        };
+    }, [isOpen]);
 
     return (
         <div className="md:hidden">
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="p-2"
+                className="p-2 z-50"
                 aria-label="Toggle menu"
             >
-                {isOpen ? <X size={24} /> : <Menu size={24} />}
+                {isOpen ? <X size={24} className="text-black" onClick={() => setIsOpen(false)}/> : <Menu size={24}/>}
             </button>
 
             {isOpen && (
-                <div className="fixed inset-0 z-50 bg-primary pt-16">
+                <motion.div
+                    className="fixed inset-0 z-40 bg-primary pt-16"
+                    initial="hidden"
+                    animate="visible"
+                    exit="exit"
+                    variants={menuVariants}
+                    transition={{duration: 0.3}}
+                >
                     <div className="container">
                         <nav className="flex flex-col space-y-4">
                             <Link
@@ -50,7 +75,7 @@ export default function Navigation() {
                             </Link>
                         </nav>
                     </div>
-                </div>
+                </motion.div>
             )}
         </div>
     );

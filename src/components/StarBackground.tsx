@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import React, {useEffect, useRef} from 'react';
 import * as THREE from 'three';
 
 const StarBackground = () => {
@@ -11,7 +11,6 @@ const StarBackground = () => {
 
         // Three.jsシーンのセットアップ
         const scene = new THREE.Scene();
-        // 背景色を黒に設定（この行を追加）
         scene.background = new THREE.Color(0x000914);
 
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -23,7 +22,6 @@ const StarBackground = () => {
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.setPixelRatio(window.devicePixelRatio);
 
-        // 既に子要素がある場合は削除
         while (containerRef.current.firstChild) {
             containerRef.current.removeChild(containerRef.current.firstChild);
         }
@@ -32,40 +30,44 @@ const StarBackground = () => {
 
         // 星のジオメトリを作成
         const starGeometry = new THREE.BufferGeometry();
+        const colors = [];
         const starMaterial = new THREE.PointsMaterial({
-            color: 0xffffff,
-            size: 0.7,
+            size: 0.2, // サイズを小さく調整
+            vertexColors: true,
             transparent: true,
+            opacity: 0.9,
+            sizeAttenuation: true,
+            map: new THREE.TextureLoader().load('https://threejs.org/examples/textures/sprites/spark1.png'), // 星形のテクスチャ
+            alphaTest: 0.5,
         });
 
-        // 星の数
         const starsCount = 1500;
         const positions = new Float32Array(starsCount * 3);
-        const opacities = new Float32Array(starsCount);
-        const sizes = new Float32Array(starsCount);
 
-        // 星をランダムな位置に配置
         for (let i = 0; i < starsCount; i++) {
-            // 画面奥行きの星を配置（z軸の値を調整）
             positions[i * 3] = (Math.random() - 0.5) * 100; // x
             positions[i * 3 + 1] = (Math.random() - 0.5) * 100; // y
             positions[i * 3 + 2] = Math.random() * 50 - 25; // z
 
-            // ランダムな透明度と大きさ
-            opacities[i] = Math.random();
-            sizes[i] = Math.random() * 2;
+            const colorOptions = [
+                new THREE.Color(0xff0000), // 赤
+                new THREE.Color(0xff8c00), // 橙
+                new THREE.Color(0xffff00), // 黄
+                new THREE.Color(0x0000ff), // 青
+                new THREE.Color(0x800080)  // 紫
+            ];
+            const color = colorOptions[Math.floor(Math.random() * colorOptions.length)];
+            colors.push(color.r, color.g, color.b);
         }
 
         starGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        starGeometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
 
-        // 星のポイントを作成
         const stars = new THREE.Points(starGeometry, starMaterial);
         scene.add(stars);
 
-        // カメラの位置調整
         camera.position.z = 20;
 
-        // リサイズハンドラ
         const handleResize = () => {
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
@@ -74,26 +76,17 @@ const StarBackground = () => {
 
         window.addEventListener('resize', handleResize);
 
-        // アニメーションループ
         const animate = () => {
             requestAnimationFrame(animate);
 
-            // 星をゆっくり回転
             stars.rotation.x += 0.0001;
             stars.rotation.y += 0.0002;
-
-            // マウス位置に応じた視差効果
-            const mouseX = 0;
-            const mouseY = 0;
-            stars.rotation.x += (mouseY * 0.00005 - stars.rotation.x) * 0.05;
-            stars.rotation.y += (mouseX * 0.00005 - stars.rotation.y) * 0.05;
 
             renderer.render(scene, camera);
         };
 
         animate();
 
-        // クリーンアップ
         return () => {
             window.removeEventListener('resize', handleResize);
             scene.remove(stars);
@@ -106,7 +99,7 @@ const StarBackground = () => {
         };
     }, []);
 
-    return <div ref={containerRef} className="star-bg" />;
+    return <div ref={containerRef} className="star-bg"/>;
 };
 
 export default StarBackground;
