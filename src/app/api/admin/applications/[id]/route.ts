@@ -13,7 +13,7 @@ const updateStatusSchema = z.object({
 
 export async function PATCH(
     request: NextRequest,
-    { params }: { params: { id: Promise<string> } }
+    { params }: { params: { id: string } }
 ) {
     try {
         const session = await getServerSession(authOptions);
