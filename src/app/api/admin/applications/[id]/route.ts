@@ -13,7 +13,7 @@ const updateStatusSchema = z.object({
 
 export async function PATCH(
     request: Request,
-    { params }: { params: { id: string } },
+    { params }: { params: Promise<{ id: string }> }
 ) {
     try {
         const session = await getServerSession(authOptions);
@@ -24,7 +24,7 @@ export async function PATCH(
             });
         }
         // paramsのidを待機してから使用
-        const id = parseInt(params.id);
+        const id = parseInt((await params).id);
         if (isNaN(id)) {
             return new NextResponse(JSON.stringify({ error: '無効なID' }), {
                 status: 400,
