@@ -100,35 +100,35 @@ export default function CheckStatus() {
     };
 
     return (
-        <div className="max-w-2xl mx-auto">
-            <div className="mb-6">
+        <div className="w-full px-4 sm:max-w-2xl sm:mx-auto">
+            <div className="mb-4 mt-3 sm:mb-6">
                 <Link href="/">
-                    <Button variant="ghost" className="flex items-center">
-                        <ArrowLeft className="h-4 w-4 mr-2" />
+                    <Button variant="ghost" className="flex items-center px-2 py-1 h-auto">
+                        <ArrowLeft className="h-4 w-4 mr-1.5" />
                         トップに戻る
                     </Button>
                 </Link>
             </div>
 
-            <div className="bg-white p-8 rounded-lg shadow-lg">
-                <h1 className="text-2xl font-bold text-center mb-6">応募状況確認</h1>
+            <div className="bg-white p-5 sm:p-8 rounded-lg shadow-lg">
+                <h1 className="text-xl sm:text-2xl font-bold text-center mb-4 sm:mb-6">応募状況確認</h1>
 
                 {!application ? (
                     <>
-                        <p className="text-gray-600 mb-6">
+                        <p className="text-gray-600 mb-5 text-sm sm:text-base">
                             応募時に受け取った認証コードとメールアドレスを入力して、審査状況を確認してください。
                         </p>
 
                         {error && (
-                            <div className="mb-6 p-4 bg-red-50 border-l-4 border-red-500 text-red-700 rounded-md flex items-start">
-                                <AlertCircle className="h-5 w-5 mr-2 mt-0.5 flex-shrink-0" />
+                            <div className="mb-5 p-3 sm:p-4 bg-red-50 border-l-4 border-red-500 text-red-700 rounded-md flex items-start text-sm">
+                                <AlertCircle className="h-4 w-4 mr-2 mt-0.5 flex-shrink-0" />
                                 <div>{error}</div>
                             </div>
                         )}
 
-                        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+                        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 sm:space-y-6">
                             <div>
-                                <Label htmlFor="email" className="font-medium">
+                                <Label htmlFor="email" className="font-medium text-sm">
                                     メールアドレス
                                 </Label>
                                 <Input
@@ -136,44 +136,44 @@ export default function CheckStatus() {
                                     type="email"
                                     placeholder="応募時に使用したメールアドレス"
                                     {...register('email')}
-                                    className={errors.email ? 'border-red-500' : ''}
+                                    className={`mt-1 text-sm ${errors.email ? 'border-red-500' : ''}`}
                                 />
                                 {errors.email && (
-                                    <p className="mt-1 text-red-500 text-sm">{errors.email.message}</p>
+                                    <p className="mt-1 text-red-500 text-xs">{errors.email.message}</p>
                                 )}
                             </div>
 
                             <div>
-                                <Label htmlFor="verificationCode" className="font-medium">
+                                <Label htmlFor="verificationCode" className="font-medium text-sm">
                                     認証コード
                                 </Label>
                                 <Input
                                     id="verificationCode"
                                     placeholder="8桁の認証コード"
                                     {...register('verificationCode')}
-                                    className={errors.verificationCode ? 'border-red-500' : ''}
+                                    className={`mt-1 text-sm ${errors.verificationCode ? 'border-red-500' : ''}`}
                                 />
                                 {errors.verificationCode && (
-                                    <p className="mt-1 text-red-500 text-sm">{errors.verificationCode.message}</p>
+                                    <p className="mt-1 text-red-500 text-xs">{errors.verificationCode.message}</p>
                                 )}
-                                <p className="mt-1 text-gray-500 text-sm">
+                                <p className="mt-1 text-gray-500 text-xs">
                                     認証コードは応募完了時に送信されたメールに記載されています。
                                 </p>
                             </div>
 
                             <Button
                                 type="submit"
-                                className="w-full"
+                                className="w-full mt-2 text-sm py-2 h-auto"
                                 disabled={isLoading}
                             >
                                 {isLoading ? (
-                                    <span className="flex items-center">
+                                    <span className="flex items-center justify-center">
                                         <span className="animate-spin h-4 w-4 mr-2 border-b-2 border-white rounded-full"></span>
                                         読み込み中...
                                     </span>
                                 ) : (
-                                    <span className="flex items-center">
-                                        <Search className="h-4 w-4 mr-2" />
+                                    <span className="flex items-center justify-center">
+                                        <Search className="h-4 w-4 mr-1.5" />
                                         審査状況を確認
                                     </span>
                                 )}
@@ -181,43 +181,45 @@ export default function CheckStatus() {
                         </form>
                     </>
                 ) : (
-                    <div className="space-y-6">
-                        <div className="bg-gray-50 p-6 rounded-lg">
-                            <div className="flex justify-between items-center mb-4">
-                                <h2 className="text-xl font-semibold">{application.name} さんの応募状況</h2>
-                                {getStatusBadge(application.status)}
+                    <div className="space-y-4 sm:space-y-6">
+                        <div className="bg-gray-50 p-4 sm:p-6 rounded-lg">
+                            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 mb-4">
+                                <h2 className="text-lg font-semibold">{application.name} さんの応募状況</h2>
+                                <div className="self-start sm:self-center">
+                                    {getStatusBadge(application.status)}
+                                </div>
                             </div>
 
-                            <div className="space-y-4">
+                            <div className="space-y-3 sm:space-y-4 text-sm">
                                 <div>
-                                    <h3 className="text-sm font-medium text-gray-500">ステータスメッセージ</h3>
+                                    <h3 className="text-xs font-medium text-gray-500">ステータスメッセージ</h3>
                                     <p className="mt-1">{application.statusMessage || '特に追加情報はありません。'}</p>
                                 </div>
 
                                 <div>
-                                    <h3 className="text-sm font-medium text-gray-500">応募日時</h3>
+                                    <h3 className="text-xs font-medium text-gray-500">応募日時</h3>
                                     <p className="mt-1">{new Date(application.createdAt).toLocaleString('ja-JP')}</p>
                                 </div>
 
                                 <div>
-                                    <h3 className="text-sm font-medium text-gray-500">最終更新日時</h3>
+                                    <h3 className="text-xs font-medium text-gray-500">最終更新日時</h3>
                                     <p className="mt-1">{new Date(application.updatedAt).toLocaleString('ja-JP')}</p>
                                 </div>
                             </div>
                         </div>
 
-                        <div className="flex flex-col sm:flex-row gap-4">
+                        <div className="flex flex-col gap-3">
                             <Button
-                                className="flex-1 flex items-center justify-center"
+                                className="w-full py-2 h-auto text-sm flex items-center justify-center"
                                 onClick={() => setApplication(null)}
                             >
-                                <ArrowLeft className="h-4 w-4 mr-2" />
+                                <ArrowLeft className="h-4 w-4 mr-1.5" />
                                 戻る
                             </Button>
-                            <Link href="/" className="flex-1">
+                            <Link href="/" className="w-full">
                                 <Button
                                     variant="outline"
-                                    className="w-full"
+                                    className="w-full py-2 h-auto text-sm"
                                 >
                                     トップページへ
                                 </Button>

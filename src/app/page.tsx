@@ -10,7 +10,7 @@ import { useInView } from 'react-intersection-observer';
 
 // Lucide Icons
 import {
-    Star, ChevronDown, Download, Calendar, Users, Sword, Sparkles, MapPin, Zap
+    Star, ChevronDown, Download, Calendar, Users, Sword, Sparkles, MapPin, Zap, ArrowRight
 } from 'lucide-react';
 
 // UI Components
@@ -67,14 +67,14 @@ const FeatureCard = ({ icon: Icon, title, description, delay = 0 }: FeatureCardP
     return (
         <motion.div
             className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-all duration-300
-                 hover:scale-105 hover:bg-gradient-to-br from-white to-primary-50"
+                 hover:scale-105 hover:bg-gradient-to-br from-white to-primary-50 h-full flex flex-col"
         >
             <div className="bg-primary-500/10 w-14 h-14 rounded-2xl flex items-center justify-center mb-4
                       transform hover:rotate-3 transition-transform duration-300">
                 <Icon className="h-7 w-7 text-primary-600" />
             </div>
             <h3 className="text-xl font-semibold mb-3 text-gray-800 tracking-tight">{title}</h3>
-            <p className="text-gray-600 leading-relaxed">{description}</p>
+            <p className="text-gray-600 leading-relaxed flex-grow">{description}</p>
         </motion.div>
     );
 };
@@ -141,7 +141,7 @@ export default function Home() {
             {/* ヒーローセクション */}
             <section
                 ref={heroRef}
-                className="min-h-[90vh] flex flex-col justify-center items-center relative pt-20 overflow-hidden"
+                className="min-h-[90vh] flex flex-col justify-center items-center relative pt-12 sm:pt-20 overflow-hidden"
             >
                 {/* バックグラウンドエフェクト */}
                 <div className="absolute inset-0 z-0">
@@ -157,13 +157,13 @@ export default function Home() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 1, delay: 0.2 }}
-                    className="text-center z-10 px-4 sm:px-6 relative"
+                    className="text-center z-10 px-4 sm:px-6 relative max-w-4xl"
                 >
                     <motion.h1
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.5 }}
-                        className="text-5xl md:text-7xl font-bold mb-6 text-white"
+                        className="text-4xl sm:text-5xl md:text-7xl font-bold mb-6 text-white leading-tight"
                     >
                         ステラフィルワールド
                     </motion.h1>
@@ -181,7 +181,7 @@ export default function Home() {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ duration: 1, delay: 0.9 }}
-                        className="text-xl md:text-2xl mb-10 max-w-2xl mx-auto leading-relaxed text-white"
+                        className="text-lg sm:text-xl md:text-2xl mb-10 max-w-2xl mx-auto leading-relaxed text-white"
                     >
                         「シデリオン大陸」を舞台にした
                         <span className="text-primary-300 font-semibold"> オープンワールドMMORPG型 </span>
@@ -197,7 +197,7 @@ export default function Home() {
                         <Link href="/apply">
                             <Button
                                 size="lg"
-                                className="bg-gradient-to-r from-blue-600 to-blue-400 hover:opacity-90 text-white border-none rounded-full px-8 py-6 text-lg shadow-md hover:shadow-lg transition-all duration-300"
+                                className="bg-gradient-to-r from-blue-600 to-blue-400 hover:opacity-90 text-white border-none rounded-full px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg shadow-md hover:shadow-lg transition-all duration-300 w-full sm:w-auto"
                             >
                                 <Star className="mr-2 h-5 w-5" />
                                 応募する
@@ -207,7 +207,7 @@ export default function Home() {
                             <Button
                                 variant="outline"
                                 size="lg"
-                                className="bg-gradient-to-r from-lime-600 to-lime-400 hover:opacity-90 text-white border-none rounded-full px-8 py-6 text-lg shadow-md hover:shadow-lg transition-all duration-300"
+                                className="bg-gradient-to-r from-lime-600 to-lime-400 hover:opacity-90 text-white border-none rounded-full px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg shadow-md hover:shadow-lg transition-all duration-300 w-full sm:w-auto"
                             >
                                 <Download className="mr-2 h-5 w-5" />
                                 詳細を見る
@@ -243,17 +243,17 @@ export default function Home() {
 
             {/* 応募統計コンポーネント */}
             <section className="py-6">
-                <div className="card-section p-6">
+                <div className="card-section p-4 sm:p-6 mx-4 sm:mx-0">
                     <ApplicationStats />
                 </div>
             </section>
 
             {/* 企画概要セクション */}
-            <section id="overview" className="py-12">
-                <div className="card-section p-8">
+            <section id="overview" className="py-8 sm:py-12">
+                <div className="card-section p-6 sm:p-8 mx-4 sm:mx-0">
                     <AnimatedSection delay={0.2} className="relative z-10">
-                        <div className="text-center mb-16">
-                            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-primary-600">
+                        <div className="text-center mb-12 sm:mb-16">
+                            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 text-primary-600">
                                 企画概要
                             </h2>
                             <div className="h-1 w-20 bg-gradient-to-r from-primary-500 to-accent mx-auto"></div>
@@ -261,12 +261,12 @@ export default function Home() {
                     </AnimatedSection>
 
                     <div className="max-w-7xl mx-auto relative z-10">
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                            <AnimatedSection delay={0.4} className="bg-gray-50 p-8 rounded-xl shadow-sm">
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center">
+                            <AnimatedSection delay={0.4} className="bg-gray-50 p-6 sm:p-8 rounded-xl shadow-sm">
                                 <div className="absolute -top-3 -left-3 w-16 h-16 text-primary-600">
                                     <div className="absolute inset-0 bg-primary-500/20 rounded-lg transform rotate-45"></div>
                                 </div>
-                                <div className="space-y-6 text-gray-700">
+                                <div className="space-y-4 sm:space-y-6 text-gray-700">
                                     <p>
                                         「ステラフィルワールド」は、
                                         <span className="text-primary-600 font-medium">シデリオン大陸</span>
@@ -282,31 +282,39 @@ export default function Home() {
                             </AnimatedSection>
 
                             <AnimatedSection delay={0.6}>
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                    <FeatureCard
-                                        icon={Users}
-                                        title="最大200名"
-                                        description="VTuberや配信者などのクリエイターが集う大規模サーバー"
-                                        delay={0.1}
-                                    />
-                                    <FeatureCard
-                                        icon={MapPin}
-                                        title="5つの国家"
-                                        description="それぞれ独自の文化や特色を持つ5つの国と2つの特別地域"
-                                        delay={0.2}
-                                    />
-                                    <FeatureCard
-                                        icon={Sword}
-                                        title="戦闘システム"
-                                        description="プレイヤークラスを選んで独自の戦闘スタイルを構築"
-                                        delay={0.3}
-                                    />
-                                    <FeatureCard
-                                        icon={Zap}
-                                        title="AI生成クエスト"
-                                        description="生成AIによる無限のクエストと冒険"
-                                        delay={0.4}
-                                    />
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+                                    <div className="h-full">
+                                        <FeatureCard
+                                            icon={Users}
+                                            title="最大200名"
+                                            description="VTuberや配信者などのクリエイターが集う大規模サーバー"
+                                            delay={0.1}
+                                        />
+                                    </div>
+                                    <div className="h-full">
+                                        <FeatureCard
+                                            icon={MapPin}
+                                            title="5つの国家"
+                                            description="それぞれ独自の文化や特色を持つ5つの国と2つの特別地域"
+                                            delay={0.2}
+                                        />
+                                    </div>
+                                    <div className="h-full">
+                                        <FeatureCard
+                                            icon={Sword}
+                                            title="戦闘システム"
+                                            description="プレイヤークラスを選んで独自の戦闘スタイルを構築"
+                                            delay={0.3}
+                                        />
+                                    </div>
+                                    <div className="h-full">
+                                        <FeatureCard
+                                            icon={Zap}
+                                            title="AI生成クエスト"
+                                            description="生成AIによる無限のクエストと冒険"
+                                            delay={0.4}
+                                        />
+                                    </div>
                                 </div>
                             </AnimatedSection>
                         </div>
@@ -315,18 +323,18 @@ export default function Home() {
             </section>
 
             {/* 楽しみ方セクション */}
-            <section className="py-12">
-                <div className="card-section p-8">
+            <section className="py-8 sm:py-12">
+                <div className="card-section p-6 sm:p-8 mx-4 sm:mx-0">
                     <AnimatedSection delay={0.2}>
-                        <div className="text-center mb-16">
-                            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-primary-600">
+                        <div className="text-center mb-12 sm:mb-16">
+                            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 text-primary-600">
                                 楽しみ方
                             </h2>
                             <div className="h-1 w-20 bg-gradient-to-r from-primary-500 to-accent mx-auto"></div>
                         </div>
                     </AnimatedSection>
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
                         {[
                             {
                                 icon: Star,
@@ -347,13 +355,13 @@ export default function Home() {
                                 delay: 0.5,
                             },
                         ].map((item) => (
-                            <AnimatedSection key={item.title} delay={item.delay}>
-                                <div className="bg-white p-6 h-full flex flex-col rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
+                            <AnimatedSection key={item.title} delay={item.delay} className="h-full">
+                                <div className="bg-white p-5 sm:p-6 h-full flex flex-col rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
                                     <div className="mb-4 flex items-center">
                                         <div className="w-12 h-12 rounded-full bg-primary-500/20 flex items-center justify-center">
                                             <item.icon className="h-6 w-6 text-primary-600" />
                                         </div>
-                                        <h3 className="text-xl font-semibold ml-3 text-gray-800">
+                                        <h3 className="text-lg sm:text-xl font-semibold ml-3 text-gray-800">
                                             {item.title}
                                         </h3>
                                     </div>
@@ -366,29 +374,29 @@ export default function Home() {
             </section>
 
             {/* シデリオン大陸セクション */}
-            <section className="py-12">
-                <div className="card-section p-8">
+            <section className="py-8 sm:py-12">
+                <div className="card-section p-6 sm:p-8 mx-4 sm:mx-0">
                     <AnimatedSection delay={0.2}>
-                        <div className="text-center mb-16">
-                            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-primary-600">
+                        <div className="text-center mb-12 sm:mb-16">
+                            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 text-primary-600">
                                 シデリオン大陸
                             </h2>
                             <div className="h-1 w-20 bg-gradient-to-r from-primary-500 to-accent mx-auto"></div>
                         </div>
                     </AnimatedSection>
 
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center">
                         <AnimatedSection delay={0.4}>
-                            <div className="bg-gray-50 p-8 rounded-xl shadow-sm border-primary-500/20 relative overflow-hidden">
+                            <div className="bg-gray-50 p-6 sm:p-8 rounded-xl shadow-sm border-primary-500/20 relative overflow-hidden">
                                 {/* 装飾的な星のエフェクト */}
                                 <div className="absolute -top-10 -right-10 w-40 h-40 blur-xl rounded-full bg-primary-500/10"></div>
                                 <div className="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-primary-500/10 to-transparent"></div>
                                 <div className="relative">
-                                    <h3 className="text-2xl font-semibold mb-4 text-gray-800">
+                                    <h3 className="text-xl sm:text-2xl font-semibold mb-4 text-gray-800">
                                         星型の大陸
                                     </h3>
-                                    <div className="space-y-4 text-gray-700">
-                                        <p className="text-lg">
+                                    <div className="space-y-3 sm:space-y-4 text-gray-700">
+                                        <p className="text-base sm:text-lg">
                                             星のような形をした大陸です。まだ、未発見の島があるとか…
                                         </p>
                                         <p>
@@ -404,7 +412,7 @@ export default function Home() {
 
                         <AnimatedSection delay={0.6}>
                             <div className="bg-white p-1 overflow-hidden rounded-xl shadow-sm">
-                                <div className="w-full h-64 md:h-80 lg:h-96 bg-gradient-to-br from-primary-900 to-primary-950 flex items-center justify-center relative">
+                                <div className="w-full h-52 sm:h-64 md:h-80 lg:h-96 bg-gradient-to-br from-primary-900 to-primary-950 flex items-center justify-center relative">
                                     {/* 星型の大陸の図式表現 */}
                                     <div className="relative w-3/4 h-3/4">
                                         <Image
@@ -421,11 +429,11 @@ export default function Home() {
             </section>
 
             {/* 進化する世界セクション */}
-            <section className="py-12">
-                <div className="card-section p-8">
+            <section className="py-8 sm:py-12">
+                <div className="card-section p-6 sm:p-8 mx-4 sm:mx-0">
                     <AnimatedSection delay={0.2}>
-                        <div className="text-center mb-16">
-                            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-primary-600">
+                        <div className="text-center mb-10 sm:mb-16">
+                            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 text-primary-600">
                                 進化する世界
                             </h2>
                             <div className="h-1 w-20 bg-gradient-to-r from-primary-500 to-accent mx-auto"></div>
@@ -433,19 +441,19 @@ export default function Home() {
                     </AnimatedSection>
 
                     <AnimatedSection delay={0.4}>
-                        <div className="bg-gray-50 p-8 relative overflow-hidden rounded-xl shadow-sm">
+                        <div className="bg-gray-50 p-6 sm:p-8 relative overflow-hidden rounded-xl shadow-sm">
                             {/* 装飾エフェクト */}
                             <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-radial from-primary-500/10 to-transparent"></div>
                             <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-radial from-accent/10 to-transparent"></div>
                             <div className="relative text-center max-w-3xl mx-auto">
-                                <p className="text-xl text-gray-700 leading-relaxed">
+                                <p className="text-lg sm:text-xl text-gray-700 leading-relaxed">
                                     進化し続ける世界。3日ごとのアップデートが、冒険に新たな風を吹き込む。今日の発見が、明日には伝説となる。
                                 </p>
                                 <div className="mt-8 flex justify-center">
                                     <Link href="/apply">
                                         <Button
                                             size="lg"
-                                            className="bg-gradient-to-r from-blue-600 to-blue-400 hover:opacity-90 text-white border-none rounded-full px-8 py-6 text-lg shadow-md hover:shadow-lg transition-all duration-300"
+                                            className="bg-gradient-to-r from-blue-600 to-blue-400 hover:opacity-90 text-white border-none rounded-full px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg shadow-md hover:shadow-lg transition-all duration-300"
                                         >
                                             <Star className="mr-2 h-5 w-5" />
                                             応募する
@@ -459,22 +467,23 @@ export default function Home() {
             </section>
 
             {/* 応募ボタンセクション */}
-            <section className="py-12">
-                <div className="card-section p-8 bg-gradient-to-br from-white to-gray-50">
+            <section className="py-10 sm:py-12">
+                <div className="card-section p-6 sm:p-8 bg-gradient-to-br from-white to-gray-50 mx-4 sm:mx-0">
                     <AnimatedSection delay={0.2} className="text-center">
-                        <h2 className="text-2xl md:text-3xl font-bold mb-4 text-primary-700">
+                        <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-3 sm:mb-4 text-primary-700">
                             2025年4月5日土曜日から開催
                         </h2>
-                        <p className="text-xl mb-8 text-gray-700">
+                        <p className="text-lg sm:text-xl mb-6 sm:mb-8 text-gray-700">
                             ぜひあなたも参加してみませんか？
                         </p>
                         <Link href="/apply">
                             <Button
                                 size="lg"
-                                className="bg-gradient-to-r from-blue-600 to-blue-400 hover:opacity-90 text-white border-none rounded-full px-8 py-6 text-lg shadow-md hover:shadow-lg transition-all duration-300"
+                                className="bg-gradient-to-r from-blue-600 to-blue-400 hover:opacity-90 text-white border-none rounded-full px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg shadow-md hover:shadow-lg transition-all duration-300 group"
                             >
                                 <Star className="mr-2 h-5 w-5" />
                                 応募フォームへ
+                                <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                             </Button>
                         </Link>
                     </AnimatedSection>

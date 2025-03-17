@@ -41,7 +41,7 @@ export async function sendConfirmationEmail(
 ) {
     try {
         await transporter.sendMail({
-            from: process.env.EMAIL_FROM || 'support@tproject.jp',
+            from: process.env.EMAIL_FROM || 'no-reply@tproject.jp',
             to: email,
             subject: '【ステラフィルワールド】応募ありがとうございます',
             html: `
@@ -51,173 +51,70 @@ export async function sendConfirmationEmail(
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ステラフィルワールド応募確認</title>
-    <style>
-        /* メールクライアント互換性を考慮したリセットCSS */
-        body, html {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            line-height: 1.6;
-            color: #1a1a1a;
-        }
-
-        /* メインコンテナ */
-        .email-container {
-            max-width: 600px;
-            margin: 0 auto;
-            background-color: #f8f9ff;
-        }
-
-        .content-wrapper {
-            padding: 40px 20px;
-            background-color: #ffffff;
-        }
-
-        /* ヘッダー */
-        .header {
-            background: linear-gradient(135deg, #4f46e5, #3b82f6);
-            padding: 30px 20px;
-            text-align: center;
-        }
-
-        .header h1 {
-            color: #ffffff;
-            font-size: 24px;
-            margin: 0;
-            font-weight: bold;
-        }
-
-        /* コンテンツ領域 */
-        .content {
-            padding: 30px;
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        /* 認証コード */
-        .verification-code {
-            background-color: #f0f7ff;
-            border: 2px solid #e0e7ff;
-            border-radius: 8px;
-            padding: 20px;
-            margin: 25px 0;
-            text-align: center;
-        }
-
-        .verification-code-text {
-            font-family: monaco, monospace;
-            font-size: 28px;
-            font-weight: bold;
-            color: #4f46e5;
-            letter-spacing: 3px;
-        }
-
-        /* ボタン */
-        .button-container {
-            text-align: center;
-            margin: 30px 0;
-        }
-
-        .button {
-            display: inline-block;
-            background-color: #4f46e5;
-            color: #ffffff;
-            text-decoration: none;
-            padding: 14px 28px;
-            border-radius: 6px;
-            font-weight: bold;
-            font-size: 16px;
-        }
-
-        /* テキスト */
-        .text {
-            margin: 16px 0;
-            color: #1a1a1a;
-        }
-
-        /* フッター */
-        .footer {
-            text-align: center;
-            padding: 30px 20px;
-            background-color: #f8f9ff;
-            border-top: 1px solid #e5e7eb;
-        }
-
-        .footer-text {
-            color: #6b7280;
-            font-size: 14px;
-            margin: 5px 0;
-        }
-
-        /* レスポンシブ対応 */
-        @media screen and (max-width: 600px) {
-            .content {
-                padding: 20px;
-            }
-
-            .verification-code {
-                padding: 15px;
-            }
-
-            .verification-code-text {
-                font-size: 24px;
-            }
-
-            .button {
-                display: block;
-                margin: 0 20px;
-            }
-        }
-    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <div class="email-container">
-        <div class="header">
-            <h1>ステラフィルワールド 応募確認</h1>
+<body class="bg-gray-100 font-sans">
+    <div class="max-w-2xl mx-auto my-8 bg-white rounded-lg shadow-md overflow-hidden">
+        <!-- ヘッダー -->
+        <div class="bg-gradient-to-r from-indigo-600 to-blue-500 py-8 px-6 text-center">
+            <h1 class="text-2xl font-bold text-white">ステラフィルワールド 応募確認</h1>
         </div>
 
-        <div class="content-wrapper">
-            <div class="content">
-                <p class="text"><strong>${name}</strong> 様</p>
+        <!-- メインコンテンツ -->
+        <div class="p-8">
+            <p class="mb-4"><span class="font-semibold">${name}</span> 様</p>
 
-                <p class="text">
-                    この度はステラフィルワールドへご応募いただき、誠にありがとうございます。
-                </p>
+            <p class="mb-4 text-gray-800">
+                この度はステラフィルワールドへご応募いただき、誠にありがとうございます。
+            </p>
 
-                <p class="text">
-                    応募内容を確認の上、審査を行います。審査結果は追ってご連絡いたします。
-                </p>
+            <p class="mb-4 text-gray-800">
+                応募内容を確認の上、審査を行います。審査結果は追ってご連絡いたします。
+            </p>
 
-                <p class="text">
-                    下記の認証コードは、応募状況を確認する際に必要となります。大切に保管してください。
-                </p>
+            <p class="mb-4 text-gray-800">
+                下記の認証コードは、応募状況を確認する際に必要となります。大切に保管してください。
+            </p>
 
-                <div class="verification-code">
-                    <div class="verification-code-text">${verificationCode}</div>
-                </div>
+            <!-- 認証コード -->
+            <div class="my-6 p-5 bg-indigo-50 border-2 border-indigo-100 rounded-lg text-center">
+                <div class="font-mono text-2xl font-bold text-indigo-600 tracking-widest">${verificationCode}</div>
+            </div>
 
-                <p class="text"><strong>審査状況の確認方法：</strong></p>
-                
-                <div class="button-container">
-                    <a href="${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/check-status" class="button">
-                        審査状況を確認する
-                    </a>
-                </div>
+            <p class="mt-6 mb-2 font-semibold text-gray-800">審査状況の確認方法：</p>
+            
+            <!-- ボタン -->
+            <div class="my-6 text-center">
+                <a href="${process.env.NEXT_PUBLIC_BASE_URL || 'https://sfw.tproject.jp'}/check-status" 
+                   class="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300">
+                    審査状況を確認する
+                </a>
+            </div>
 
-                <p class="text">
-                    ご不明な点がございましたら、本メールに返信いただくか、Discordでお問い合わせください。
-                </p>
+            <p class="mb-4 text-gray-800">
+                ご不明な点がございましたら、support@tproject.jpまで、またはT-Project公式Discordコミュニティサーバーのお問い合わせチケットにてお問い合わせください。
+            </p>
 
-                <p class="text">
-                    引き続きよろしくお願いいたします。
+            <div class="mt-8 p-5 bg-gray-50 rounded-lg border border-gray-200">
+                <p class="text-sm text-gray-600">
+                    <span class="font-semibold">ご注意：</span> 本メールはno-reply@tproject.jpから送られる送信専用メールです。本件に関するお問い合わせは「support@tproject.jp」または「T-Project公式Discordコミュニティサーバーのお問い合わせチケット」にお願いいたします。とどめんまたはスタッフ、各参加者へ直接の連絡を試みる行為はお控えください。
                 </p>
             </div>
 
-            <div class="footer">
-                <p class="footer-text">ステラフィルワールド運営チーム</p>
-                <p class="footer-text">T-Project</p>
+            <p class="mt-6 text-gray-800">
+                引き続きよろしくお願いいたします。
+            </p>
+        </div>
+
+        <!-- フッター -->
+        <div class="bg-gray-50 py-6 px-8 border-t border-gray-200">
+            <div class="text-center text-gray-600">
+                <p class="mb-2">ステラフィルワールド運営チーム</p>
+                <p class="mb-2">T-Project</p>
+                <p class="mt-4 text-sm">© 2025 T-Project. All rights reserved</p>
+                <p class="mt-2 text-xs text-gray-500">
+                    本企画はMojang Studioならびにマイクロソフト社とは一切関係がございません。
+                </p>
             </div>
         </div>
     </div>
