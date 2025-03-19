@@ -52,6 +52,12 @@ export default function Navigation() {
                             >
                                 ホーム
                             </Link>
+                            <Link href="/player-serch"
+                                  className="text-primary-foreground text-lg py-2"
+                                  onClick={() => setIsOpen(false)}
+                                  >
+                                プレイヤー検索
+                            </Link>
                             <Link
                                 href="/apply"
                                 className="text-primary-foreground text-lg py-2"
@@ -72,6 +78,12 @@ export default function Navigation() {
                                 onClick={() => setIsOpen(false)}
                             >
                                 プライバシーポリシー
+                            </Link>
+                            <Link href="/check-status"
+                                  className="text-primary-foreground text-lg py-2"
+                                  onClick={() => setIsOpen(false)}
+                            >
+                                審査状況
                             </Link>
                         </nav>
                     </div>

@@ -39,6 +39,7 @@ export default function Header() {
     const menuItems = [
         { name: 'ホーム', href: '/' },
         { name: '応募フォーム', href: '/apply' },
+        { name: 'プレイヤー検索', href: '/player-search' }, // この行を追加
         { name: '利用規約', href: '/terms' },
         { name: 'プライバシーポリシー', href: '/privacy' },
         { name: '審査状況', href: '/check-status' }

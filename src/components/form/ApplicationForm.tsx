@@ -192,7 +192,7 @@ export default function ApplicationForm() {
                             className={`pl-10 ${errors.channelLink ? 'border-red-500 focus-visible:ring-red-500' : ''}`}
                         />
                     </div>
-                    <p className="mt-1 text-secondary text-xs">メインとなるチャンネルのURLを入力してください</p>
+                    <p className="mt-1 text-xs">メインとなるチャンネルのURLを入力してください</p>
                     {errors.channelLink && (
                         <p className="mt-1.5 text-red-500 text-sm">{errors.channelLink.message}</p>
                     )}
@@ -258,7 +258,7 @@ export default function ApplicationForm() {
                         <option value="monthly">月に1回</option>
                         <option value="irregular">不定期</option>
                     </select>
-                    <p className="mt-2 text-secondary text-xs">
+                    <p className="mt-2 text-xs">
                         ※高頻度での配信が難しくても問題ありません。ご自身のペースで活動していただけます。
                     </p>
                 </div>
