@@ -15,7 +15,7 @@ export default function Apply() {
         <>
             <div className="mb-6">
                 <Link href="/">
-                    <Button variant="ghost" className="flex items-center">
+                    <Button variant="link" className="flex items-center">
                         <span className="mr-2">←</span> トップに戻る
                     </Button>
                 </Link>
