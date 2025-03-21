@@ -98,6 +98,15 @@ export default function ApplicationForm() {
                 <p className="mt-2 text-center">
                     以下のフォームに必要事項を入力して応募してください。<span className="text-red-500">*</span> は必須項目です。
                 </p>
+                <p className="mt-2 text-center">
+                    【注意事項】<br/>
+                    ・1人1回までのご応募でお願いいたします。別のアカウント等で複数回ご応募された場合はすべての応募を無効とさせていただきます。<br/>
+                    ・回答に不備があった場合(例えば、メールアドレスが間違っていた等)は「support@tproject.jp」にお問い合わせください。<br/>
+                    【応募条件】<br/>
+                    ・チャンネル登録者数又はそれに準ずるフォロワー数が5万人以上である方。(ただし、Twitchの場合は1万人以上とさせていただきます。)<br/>
+                    ・満18歳以上である方。<br/>
+                    ・継続して本企画で配信活動等を行っていただける方。
+                </p>
             </div>
 
             {submitError && (
