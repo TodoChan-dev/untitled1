@@ -110,6 +110,7 @@ export default function ApplicationForm() {
                     ・満18歳以上である方。<br/>
                     ・継続して本企画で配信活動等を行っていただける方。
                 </p>
+            </div>
 
             {submitError && (
                 <div className="mb-6 p-4 bg-red-50 border-l-4 border-red-500 text-red-700 rounded-md flex items-start">
