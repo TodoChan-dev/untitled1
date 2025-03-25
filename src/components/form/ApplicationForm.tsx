@@ -98,7 +98,7 @@ export default function ApplicationForm() {
                 <p className="mt-2 text-center">
                     以下のフォームに必要事項を入力して応募してください。<span className="text-red-500">*</span> は必須項目です。
                 </p>
-                <p className="mt-4 text-center p-4 max-w-2xl mx-auto border rounded shadow-sm">
+                <p className="mt-4 text-left p-4 max-w-2xl mx-auto border rounded shadow-sm">
                     <span className="font-bold block mb-2">【注意事項】</span>
                     ・1人1回までのご応募でお願いいたします。別のアカウント等で複数回ご応募された場合はすべての応募を無効とさせていただきます。<br/>
                     ・回答に不備があった場合(例えば、メールアドレスが間違っていた等)は「support@tproject.jp」にお問い合わせください。<br/>
