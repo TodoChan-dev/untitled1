@@ -1,4 +1,4 @@
-// src/app/apply/page.tsx
+// src/app/apply/AuctionList.tsx
 import Link from 'next/link';
 import { Star } from 'lucide-react';
 import ApplicationForm from '@/components/form/ApplicationForm';

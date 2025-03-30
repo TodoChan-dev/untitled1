@@ -1,4 +1,4 @@
-// src/app/thanks/page.tsx
+// src/app/thanks/AuctionList.tsx
 import Link from 'next/link';
 import { Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';

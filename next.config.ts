@@ -3,7 +3,7 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   /* config options here */
     images: {
-        domains: ['mc-heads.net'], // mc-heads.netからの画像を許可
+        domains: ['mc-heads.net','raw.githubusercontent.com'], // mc-heads.netからの画像を許可
         remotePatterns: [
             {
                 protocol: 'https',

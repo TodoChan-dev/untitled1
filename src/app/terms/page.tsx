@@ -1,4 +1,4 @@
-// src/app/terms/page.tsx
+// src/app/terms/AuctionList.tsx
 import Link from 'next/link';
 import { Star, ChevronLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';

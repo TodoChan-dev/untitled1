@@ -93,3 +93,12 @@ export async function sendDiscordWebhook(data: any) {
     throw error;
   }
 }
+
+
+// Add to src/lib/utils.ts
+/**
+ * Format a number as a price with thousands separators
+ */
+export function formatPrice(price: number): string {
+  return price.toLocaleString('ja-JP');
+}

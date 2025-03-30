@@ -1,6 +1,6 @@
 'use client';
 
-// src/app/check-status/page.tsx
+// src/app/check-status/AuctionList.tsx
 import { useState } from 'react';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
