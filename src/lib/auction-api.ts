@@ -1,11 +1,8 @@
 // src/lib/auction-api.ts
 import { AuctionItem } from '@/types/auction';
 
-// プラグインのWebAPIエンドポイント
-const API_BASE_URL = 'localhost:2445';
-
 export async function fetchAuctionItems(): Promise<AuctionItem[]> {
-    const response = await fetch(`${API_BASE_URL}/items`);
+    const response = await fetch('/api/auction/items');
 
     if (!response.ok) {
         throw new Error(`Failed to fetch auction items: ${response.status}`);
@@ -15,7 +12,7 @@ export async function fetchAuctionItems(): Promise<AuctionItem[]> {
 }
 
 export async function fetchAuctionItem(id: number): Promise<AuctionItem> {
-    const response = await fetch(`${API_BASE_URL}/items/${id}`);
+    const response = await fetch(`/api/auction/items/${id}`);
 
     if (!response.ok) {
         throw new Error(`Failed to fetch auction item: ${response.status}`);
@@ -25,14 +22,15 @@ export async function fetchAuctionItem(id: number): Promise<AuctionItem> {
 }
 
 export async function placeBid(itemId: number, amount: number): Promise<{ success: boolean; message: string }> {
-    // ユーザー認証のためのUUID取得（実際のアプリではユーザー認証情報を使用）
-    const playerUuid = localStorage.getItem('playerUuid');
+    // In a real application, you would get the player UUID from a context or state
+    // For demo purposes, we'll check localStorage, but this could be replaced with a more robust auth system
+    let playerUuid = "";
 
-    if (!playerUuid) {
-        throw new Error('ログインしていません。入札するにはログインが必要です。');
+    if (typeof window !== 'undefined') {
+        playerUuid = localStorage.getItem('playerUuid') || "demo-player-uuid";
     }
 
-    const response = await fetch(`${API_BASE_URL}/bid`, {
+    const response = await fetch('/api/auction/bid', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
