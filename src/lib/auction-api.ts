@@ -2,7 +2,7 @@
 import { AuctionItem } from '@/types/auction';
 
 // プラグインのWebAPIエンドポイント
-const API_BASE_URL = 'http://localhost:3333';
+const API_BASE_URL = 'localhost:2445';
 
 export async function fetchAuctionItems(): Promise<AuctionItem[]> {
     const response = await fetch(`${API_BASE_URL}/items`);
