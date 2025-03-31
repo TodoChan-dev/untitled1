@@ -66,6 +66,9 @@ export default function AuctionCard({ item, onClick }: AuctionCardProps) {
                         // エラー時は代替画像を表示
                         (e.target as HTMLImageElement).src = 'https://raw.githubusercontent.com/T-ProjectMC/StellaAssets/refs/heads/main/apple.png';
                     }}
+                    style={{
+                        imageRendering: "pixelated",
+                    }}
                 />
             </div>
 

@@ -87,6 +87,9 @@ export default function AuctionItemDetail({ item }: AuctionItemDetailProps) {
                             // エラー時は代替画像を表示
                             (e.target as HTMLImageElement).src = 'https://raw.githubusercontent.com/t-project-org/minecraft-assets/main/items/unknown.png';
                         }}
+                        style={{
+                            imageRendering: "pixelated",
+                        }}
                     />
                 </div>
             </div>
