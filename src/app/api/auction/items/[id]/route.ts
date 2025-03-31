@@ -6,11 +6,11 @@ const API_BASE_URL = 'http://100.76.121.124:2445';
 
 export async function GET(
     request: NextRequest,
-    { params }: { params: Promise<{ id: string }> | { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     try {
         // IDパラメータを取得（Promiseの場合は解決）
-        const idParam = params instanceof Promise ? (await params).id : params.id;
+        const idParam = (await params).id;
         const id = parseInt(idParam);
 
         if (isNaN(id)) {
