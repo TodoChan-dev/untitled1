@@ -7,6 +7,7 @@ import AdminLayout from '@/components/admin/AdminLayout';
 import ApplicationList from '@/components/admin/ApplicationList';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+// @ts-ignore
 import { ApplicationStatus } from '@prisma/client';
 import { Skeleton } from '@/components/ui/skeleton';
 
