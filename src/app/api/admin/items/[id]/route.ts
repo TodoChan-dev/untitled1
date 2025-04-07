@@ -11,7 +11,7 @@ const API_BASE_URL = 'http://100.76.121.124:2002';
  */
 export async function GET(
     request: NextRequest,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     try {
         // セッションチェック
@@ -24,7 +24,7 @@ export async function GET(
         }
 
         // URLからアイテムIDを取得
-        const itemId = params.id;
+        const itemId = (await params).id;
 
         if (!itemId) {
             return new NextResponse(JSON.stringify({ error: 'アイテムIDが必要です' }), {
