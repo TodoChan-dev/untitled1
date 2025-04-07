@@ -1,5 +1,5 @@
 // src/components/admin/JsonViewer.tsx
-import React, { useState } from 'react';
+import React, { useState, ReactElement } from 'react';
 import { ChevronDown, ChevronRight, Clipboard, Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
@@ -36,7 +36,7 @@ const JsonViewer: React.FC<JsonViewerProps> = ({ data, expandLevel = 1, title })
             .catch(err => console.error('Failed to copy JSON:', err));
     };
 
-    const renderValue = (value: any, path: string, depth: number): JSX.Element => {
+    const renderValue = (value: any, path: string, depth: number): ReactElement => {
         if (value === null) {
             return <span className="text-gray-500">null</span>;
         }
