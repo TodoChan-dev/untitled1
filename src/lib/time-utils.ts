@@ -1,26 +1,28 @@
 /**
- * Time utilities for ticket duration calculations
+ * Time utilities for ticket duration calculations for Japan Timezone
  */
+const JAPAN_TIMEZONE = "Asia/Tokyo";
 
 /**
  * Calculate the start and end time for a ticket
- * Tickets are valid from 12:00 noon until 3:00 AM the next day
+ * Tickets are valid from 12:00 noon until 3:00 AM the next day in Japan timezone
  */
 export function calculateTicketTimes(): { startTime: Date; endTime: Date } {
-    const now = new Date();
+    // Get current time in Japan timezone
+    const now = new Date(new Date().toLocaleString("en-US", { timeZone: JAPAN_TIMEZONE }));
 
-    // Create start time at 12:00 noon today
+    // Create start time at 12:00 noon (Japan time) today
     const startTime = new Date(now);
     startTime.setHours(12, 0, 0, 0);
 
-    // Create end time at 3:00 AM tomorrow
+    // Create end time at 3:00 AM (Japan time) tomorrow
     const endTime = new Date(now);
     endTime.setDate(endTime.getDate() + 1);
     endTime.setHours(3, 0, 0, 0);
 
-    // If current time is after 12:00 PM and before 3:00 AM the next day,
+    // If current time is after 12:00 PM and before 3:00 AM the next day (Japan time),
     // use the current time as start time
-    if (now.getHours() >= 12 || (now.getHours() < 3)) {
+    if (now.getHours() >= 12 || now.getHours() < 3) {
         return { startTime: now, endTime };
     }
 
@@ -30,18 +32,20 @@ export function calculateTicketTimes(): { startTime: Date; endTime: Date } {
 
 /**
  * Check if the current time is within a valid ticket period
- * Valid periods are from 12:00 PM to 3:00 AM the next day
+ * Valid periods are from 12:00 PM to 3:00 AM the next day in Japan timezone
  */
 export function isWithinTicketPeriod(date: Date = new Date()): boolean {
-    const hours = date.getHours();
+    // Convert input date to Japan timezone
+    const japanTime = new Date(date.toLocaleString("en-US", { timeZone: JAPAN_TIMEZONE }));
+    const hours = japanTime.getHours();
     return hours >= 12 || hours < 3;
 }
 
 /**
- * Format a date to a human-readable string
+ * Format a date to a human-readable string in Japanese locale and timezone
  */
 export function formatDate(date: Date): string {
-    return date.toLocaleString('ja-JP', {
+    return new Date(date.toLocaleString("en-US", { timeZone: JAPAN_TIMEZONE })).toLocaleString("ja-JP", {
         year: 'numeric',
         month: '2-digit',
         day: '2-digit',
