@@ -39,6 +39,7 @@ export default function Header() {
     const menuItems = [
         { name: 'ホーム', href: '/' },
         { name: 'オークション', href: '/auction' }, // Add this line
+        { name: 'ショップ', href: '/shop' },
         { name: '応募フォーム', href: '/apply' },
         { name: 'プレイヤー検索', href: '/player-search' },
         { name: '利用規約', href: '/terms' },

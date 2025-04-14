@@ -52,6 +52,22 @@ export default function Navigation() {
                             >
                                 ホーム
                             </Link>
+
+                            <Link href="/auction"
+                                    className="text-primary-foreground text-lg py-2"
+                                    onClick={() => setIsOpen(false)}
+                                    >
+                                    オークション
+                            </Link>
+
+                            <Link
+                                href="/shop"
+                                className="text-primary-foreground text-lg py-2"
+                                onClick={() => setIsOpen(false)}
+                                >
+                                ショップ
+                            </Link>
+
                             <Link href="/player-serch"
                                   className="text-primary-foreground text-lg py-2"
                                   onClick={() => setIsOpen(false)}
