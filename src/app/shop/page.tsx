@@ -75,6 +75,8 @@ export default function ShopPage() {
 
     const handleProceedToCheckout = async () => {
         setPurchaseAttempted(true);
+        setEmailError('');
+        setError('');
 
         if (!termsAccepted || !returnsAccepted) {
             return;
@@ -92,7 +94,6 @@ export default function ShopPage() {
         }
 
         setIsLoading(true);
-        setError('');
 
         try {
             const response = await fetch('/api/shop/create-checkout', {
@@ -102,6 +103,7 @@ export default function ShopPage() {
                 },
                 body: JSON.stringify({
                     playerName,
+                    email,
                     ticketType: selectedTicket,
                 }),
             });
@@ -253,7 +255,6 @@ export default function ShopPage() {
                                                 <span>参加時間</span>
                                                 <span>購入時〜翌朝3:00</span>
                                             </div>
-
                                         </div>
                                         <ul className="mt-4 space-y-2">
                                             <li className="flex items-start">
@@ -268,7 +269,24 @@ export default function ShopPage() {
                                     </CardContent>
                                     <CardFooter>
                                         <Dialog open={isDialogOpen && selectedTicket === 'regular'}
-                                                onOpenChange={setIsDialogOpen}>
+                                                onOpenChange={(open) => {
+                                                    // ダイアログを開く前にバリデーションを行う
+                                                    if (open) {
+                                                        // プレイヤー名のチェック
+                                                        if (!playerName || !playerExists) {
+                                                            setError('有効なプレイヤー名を入力してください');
+                                                            return;
+                                                        }
+
+                                                        // メールアドレスのチェック
+                                                        if (!email || !email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+                                                            setEmailError('有効なメールアドレスを入力してください');
+                                                            return;
+                                                        }
+                                                    }
+
+                                                    setIsDialogOpen(open);
+                                                }}>
                                             <DialogTrigger asChild>
                                                 <Button className="w-full">購入する</Button>
                                             </DialogTrigger>
@@ -312,7 +330,6 @@ export default function ShopPage() {
                                                 <span>参加時間</span>
                                                 <span>購入時〜翌朝3:00</span>
                                             </div>
-
                                         </div>
                                         <ul className="mt-4 space-y-2">
                                             <li className="flex items-start">
@@ -335,7 +352,24 @@ export default function ShopPage() {
                                     </CardContent>
                                     <CardFooter>
                                         <Dialog open={isDialogOpen && selectedTicket === 'gold'}
-                                                onOpenChange={setIsDialogOpen}>
+                                                onOpenChange={(open) => {
+                                                    // ダイアログを開く前にバリデーションを行う
+                                                    if (open) {
+                                                        // プレイヤー名のチェック
+                                                        if (!playerName || !playerExists) {
+                                                            setError('有効なプレイヤー名を入力してください');
+                                                            return;
+                                                        }
+
+                                                        // メールアドレスのチェック
+                                                        if (!email || !email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+                                                            setEmailError('有効なメールアドレスを入力してください');
+                                                            return;
+                                                        }
+                                                    }
+
+                                                    setIsDialogOpen(open);
+                                                }}>
                                             <DialogTrigger asChild>
                                                 <Button
                                                     className="w-full bg-gradient-to-r from-yellow-500 to-amber-500 hover:from-yellow-600 hover:to-amber-600">
@@ -433,14 +467,14 @@ function TermsDialog({
                     </div>
                     <div className="flex justify-between pb-2 border-b">
                         <span className="font-medium">有効期間</span>
-                        <span>購入日 12:00〜翌3:00</span>
+                        <span>購入時〜翌3:00</span>
                     </div>
                 </div>
 
                 <div className="bg-amber-50 p-3 rounded-md mb-4 border border-amber-200">
                     <p className="text-sm text-amber-800 flex items-start">
                         <InfoCircle className="h-4 w-4 mr-2 mt-0.5 flex-shrink-0"/>
-                        購入後すぐにサーバーへの接続が可能になります。ただし、チケットは購入後から翌朝3時までの期間のみ有効です。
+                        購入後すぐにサーバーへの接続が可能になります。ただし、チケットは午後12時から翌朝3時までの期間のみ有効です。
                     </p>
                 </div>
 

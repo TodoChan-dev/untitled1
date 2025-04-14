@@ -70,7 +70,7 @@ export async function createCheckoutSession(params: {
         mode: 'payment',
         success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/shop/success?session_id={CHECKOUT_SESSION_ID}`,
         cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/shop/cancel`,
-        customer_email: email,
+        customer_email: email, // 顧客のメールアドレスを設定
         metadata: {
             playerName,
             email,

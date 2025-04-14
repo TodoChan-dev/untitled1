@@ -6,9 +6,9 @@ import mysql from 'mysql2/promise';
 // Database connection configuration
 const dbConfig = {
     host: process.env.DB_HOST || 'localhost',
-    user: process.env.DB_USER || 't-project',
+    user: process.env.DB_USER || 'root',
     password: process.env.DB_PASSWORD || '',
-    database: process.env.DB_NAME || 'stella_fill_world',
+    database: process.env.DB_NAME || 'stellafil',
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0
@@ -27,20 +27,19 @@ export async function initDatabase() {
         try {
             // Create whitelist table
             await connection.query(`
-        CREATE TABLE IF NOT EXISTS shop_whitelist (
-          id INT AUTO_INCREMENT PRIMARY KEY,
-          player_name VARCHAR(16) NOT NULL,
-          ticket_type ENUM('regular', 'gold') NOT NULL,
-          start_time DATETIME NOT NULL,
-          end_time DATETIME NOT NULL,
-          active BOOLEAN DEFAULT TRUE,
-          created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-          updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-          UNIQUE KEY (player_name)
-        )
-      `);
+                CREATE TABLE IF NOT EXISTS shop_whitelist (
+                                                              id INT AUTO_INCREMENT PRIMARY KEY,
+                                                              player_name VARCHAR(16) NOT NULL,
+                    ticket_type ENUM('regular', 'gold') NOT NULL,
+                    start_time DATETIME NOT NULL,
+                    end_time DATETIME NOT NULL,
+                    active BOOLEAN DEFAULT TRUE,
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                    UNIQUE KEY (player_name)
+                    )
+            `);
 
-            // Create transactions table
             // Create transactions table
             await connection.query(`
                 CREATE TABLE IF NOT EXISTS shop_transactions (
@@ -72,7 +71,6 @@ export async function initDatabase() {
     }
 }
 
-
 /**
  * Create a new transaction
  */
@@ -100,11 +98,11 @@ export async function createTransaction(data: {
                 data.endTime
             ]
         );
+
         return result;
     } catch (error) {
         console.error('Error creating transaction:', error);
         throw error;
-
     }
 }
 
@@ -164,11 +162,11 @@ export async function hasActiveTicket(playerName: string) {
         const now = new Date();
 
         const [rows] = await pool.query(
-            `SELECT COUNT(*) as count FROM shop_transactions 
-       WHERE player_name = ? 
-       AND status = 'completed' 
-       AND start_time <= ? 
-       AND end_time >= ?`,
+            `SELECT COUNT(*) as count FROM shop_transactions
+             WHERE player_name = ?
+               AND status = 'completed'
+               AND start_time <= ?
+               AND end_time >= ?`,
             [playerName, now, now]
         );
 
