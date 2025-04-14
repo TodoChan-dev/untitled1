@@ -11,12 +11,19 @@ export async function POST(request: NextRequest) {
     try {
         // Parse request body
         const body = await request.json();
-        const { playerName, ticketType } = body;
+        const { playerName, email, ticketType } = body;
 
         // Validate player name
         if (!playerName || !isValidMinecraftUsername(playerName)) {
             return NextResponse.json(
                 { success: false, message: '有効なMinecraftプレイヤー名を入力してください' },
+                { status: 400 }
+            );
+        }
+        // Validate email
+        if (!email || !email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+            return NextResponse.json(
+                { success: false, message: '有効なメールアドレスを入力してください' },
                 { status: 400 }
             );
         }
@@ -44,6 +51,7 @@ export async function POST(request: NextRequest) {
         // Create Stripe checkout session
         const session = await createCheckoutSession({
             playerName,
+            email,
             ticketType,
             startTime,
             endTime,
@@ -53,8 +61,9 @@ export async function POST(request: NextRequest) {
 
         await createTransaction({
             playerName,
+            email,
             ticketType,
-            amount: TICKET_PRICES[ticketType as keyof typeof TICKET_PRICES],
+            amount: TICKET_PRICES[ticketType as 'regular' | 'gold'],
             stripeSessionId: session.id,
             startTime,
             endTime,

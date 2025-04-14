@@ -41,23 +41,26 @@ export async function initDatabase() {
       `);
 
             // Create transactions table
+            // Create transactions table
             await connection.query(`
-        CREATE TABLE IF NOT EXISTS shop_transactions (
-          id INT AUTO_INCREMENT PRIMARY KEY,
-          player_name VARCHAR(16) NOT NULL,
-          ticket_type ENUM('regular', 'gold') NOT NULL,
-          amount INT NOT NULL,
-          stripe_session_id VARCHAR(255) NOT NULL,
-          stripe_payment_intent_id VARCHAR(255),
-          start_time DATETIME NOT NULL,
-          end_time DATETIME NOT NULL,
-          status ENUM('pending', 'completed', 'failed', 'refunded') DEFAULT 'pending',
-          created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-          updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-          INDEX idx_stripe_session (stripe_session_id),
-          INDEX idx_player_name (player_name)
-        )
-      `);
+                CREATE TABLE IF NOT EXISTS shop_transactions (
+                                                                 id INT AUTO_INCREMENT PRIMARY KEY,
+                                                                 player_name VARCHAR(16) NOT NULL,
+                    email VARCHAR(255) NOT NULL,
+                    ticket_type ENUM('regular', 'gold') NOT NULL,
+                    amount INT NOT NULL,
+                    stripe_session_id VARCHAR(255) NOT NULL,
+                    stripe_payment_intent_id VARCHAR(255),
+                    start_time DATETIME NOT NULL,
+                    end_time DATETIME NOT NULL,
+                    status ENUM('pending', 'completed', 'failed', 'refunded') DEFAULT 'pending',
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                    INDEX idx_stripe_session (stripe_session_id),
+                    INDEX idx_player_name (player_name),
+                    INDEX idx_email (email)
+                    )
+            `);
 
             console.log('Database tables initialized');
         } finally {
@@ -69,11 +72,13 @@ export async function initDatabase() {
     }
 }
 
+
 /**
  * Create a new transaction
  */
 export async function createTransaction(data: {
     playerName: string;
+    email: string;
     ticketType: 'regular' | 'gold';
     amount: number;
     stripeSessionId: string;
@@ -82,11 +87,12 @@ export async function createTransaction(data: {
 }) {
     try {
         const [result] = await pool.query(
-            `INSERT INTO shop_transactions 
-        (player_name, ticket_type, amount, stripe_session_id, start_time, end_time)
-       VALUES (?, ?, ?, ?, ?, ?)`,
+            `INSERT INTO shop_transactions
+             (player_name, email, ticket_type, amount, stripe_session_id, start_time, end_time)
+             VALUES (?, ?, ?, ?, ?, ?, ?)`,
             [
                 data.playerName,
+                data.email,
                 data.ticketType,
                 data.amount,
                 data.stripeSessionId,
@@ -94,11 +100,11 @@ export async function createTransaction(data: {
                 data.endTime
             ]
         );
-
         return result;
     } catch (error) {
         console.error('Error creating transaction:', error);
         throw error;
+
     }
 }
 

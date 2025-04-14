@@ -25,11 +25,12 @@ const TICKET_DESCRIPTIONS = {
  */
 export async function createCheckoutSession(params: {
     playerName: string;
+    email: string;
     ticketType: 'regular' | 'gold';
     startTime: Date;
     endTime: Date;
 }): Promise<Stripe.Checkout.Session> {
-    const { playerName, ticketType, startTime, endTime } = params;
+    const { playerName, email, ticketType, startTime, endTime } = params;
     const price = TICKET_PRICES[ticketType];
     const description = TICKET_DESCRIPTIONS[ticketType];
 
@@ -69,8 +70,10 @@ export async function createCheckoutSession(params: {
         mode: 'payment',
         success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/shop/success?session_id={CHECKOUT_SESSION_ID}`,
         cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/shop/cancel`,
+        customer_email: email,
         metadata: {
             playerName,
+            email,
             ticketType,
             startTime: startTime.toISOString(),
             endTime: endTime.toISOString(),

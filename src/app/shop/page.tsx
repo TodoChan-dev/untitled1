@@ -1,15 +1,15 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, {useEffect, useState} from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { ChevronLeft, Star, Shield, Clock, AlertCircle, Check, Loader2 } from 'lucide-react';
+import {useRouter} from 'next/navigation';
+import {Button} from '@/components/ui/button';
+import {Input} from '@/components/ui/input';
+import {Label} from '@/components/ui/label';
+import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from '@/components/ui/card';
+import {Tabs, TabsContent, TabsList, TabsTrigger} from '@/components/ui/tabs';
+import {Check, ChevronLeft, Clock, Loader2, Shield, Star} from 'lucide-react';
 import {
     Dialog,
     DialogContent,
@@ -19,9 +19,9 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog";
-import { Checkbox } from '@/components/ui/checkbox';
-import { InfoCircle } from '@/components/shop/InfoCircle';
-import { checkPlayerExists } from '@/lib/minecraft';
+import {Checkbox} from '@/components/ui/checkbox';
+import {InfoCircle} from '@/components/shop/InfoCircle';
+import {checkPlayerExists} from '@/lib/minecraft';
 
 export default function ShopPage() {
     const router = useRouter();
@@ -29,11 +29,13 @@ export default function ShopPage() {
     const [playerAvatar, setPlayerAvatar] = useState('');
     const [playerExists, setPlayerExists] = useState<boolean | null>(null);
     const [isCheckingPlayer, setIsCheckingPlayer] = useState(false);
+    const [email, setEmail] = useState('');
     const [selectedTicket, setSelectedTicket] = useState<'regular' | 'gold'>('regular');
     const [termsAccepted, setTermsAccepted] = useState(false);
     const [returnsAccepted, setReturnsAccepted] = useState(false);
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [error, setError] = useState('');
+    const [emailError, setEmailError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [purchaseAttempted, setPurchaseAttempted] = useState(false);
 
@@ -83,6 +85,12 @@ export default function ShopPage() {
             return;
         }
 
+        // メールアドレスのバリデーション
+        if (!email || !email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+            setEmailError('有効なメールアドレスを入力してください');
+            return;
+        }
+
         setIsLoading(true);
         setError('');
 
@@ -121,7 +129,7 @@ export default function ShopPage() {
             <div className="mb-6">
                 <Link href="/">
                     <Button variant="ghost" className="flex items-center">
-                        <ChevronLeft className="mr-2 h-5 w-5" />
+                        <ChevronLeft className="mr-2 h-5 w-5"/>
                         トップに戻る
                     </Button>
                 </Link>
@@ -199,6 +207,23 @@ export default function ShopPage() {
                                     </div>
                                 </div>
                             )}
+
+                            {/* メールアドレス入力フィールド */}
+                            <div className="mt-4">
+                                <Label htmlFor="email" className="mb-2 block">
+                                    メールアドレス <span className="text-red-500">*</span>
+                                    <span className="text-xs text-gray-500 ml-2">領収書の送付先になります</span>
+                                </Label>
+                                <Input
+                                    id="email"
+                                    type="email"
+                                    placeholder="example@gmail.com"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    className={emailError ? 'border-red-500' : ''}
+                                />
+                                {emailError && <p className="text-red-500 text-xs mt-1">{emailError}</p>}
+                            </div>
                         </div>
 
                         <Tabs defaultValue="regular" className="mt-6"
@@ -231,7 +256,7 @@ export default function ShopPage() {
 
                                         </div>
                                         <ul className="mt-4 space-y-2">
-                                        <li className="flex items-start">
+                                            <li className="flex items-start">
                                                 <Check className="h-4 w-4 mt-1 mr-2 text-green-500"/>
                                                 <span>サーバーへのフルアクセス</span>
                                             </li>
@@ -249,6 +274,7 @@ export default function ShopPage() {
                                             </DialogTrigger>
                                             <TermsDialog
                                                 playerName={playerName}
+                                                email={email}
                                                 ticketType="一般チケット"
                                                 price="330円/日"
                                                 termsAccepted={termsAccepted}
@@ -289,7 +315,7 @@ export default function ShopPage() {
 
                                         </div>
                                         <ul className="mt-4 space-y-2">
-                                        <li className="flex items-start">
+                                            <li className="flex items-start">
                                                 <Check className="h-4 w-4 mt-1 mr-2 text-green-500"/>
                                                 <span>サーバーへのフルアクセス</span>
                                             </li>
@@ -318,6 +344,7 @@ export default function ShopPage() {
                                             </DialogTrigger>
                                             <TermsDialog
                                                 playerName={playerName}
+                                                email={email}
                                                 ticketType="ゴールドチケット"
                                                 price="1,000円/日"
                                                 termsAccepted={termsAccepted}
@@ -350,6 +377,7 @@ export default function ShopPage() {
 
 interface TermsDialogProps {
     playerName: string;
+    email: string;
     ticketType: string;
     price: string;
     termsAccepted: boolean;
@@ -364,6 +392,7 @@ interface TermsDialogProps {
 
 function TermsDialog({
                          playerName,
+                         email,
                          ticketType,
                          price,
                          termsAccepted,
@@ -399,6 +428,10 @@ function TermsDialog({
                         <span className="font-mono">{playerName}</span>
                     </div>
                     <div className="flex justify-between pb-2 border-b">
+                        <span className="font-medium">メールアドレス</span>
+                        <span className="font-mono">{email}</span>
+                    </div>
+                    <div className="flex justify-between pb-2 border-b">
                         <span className="font-medium">有効期間</span>
                         <span>購入日 12:00〜翌3:00</span>
                     </div>
@@ -406,7 +439,7 @@ function TermsDialog({
 
                 <div className="bg-amber-50 p-3 rounded-md mb-4 border border-amber-200">
                     <p className="text-sm text-amber-800 flex items-start">
-                        <InfoCircle className="h-4 w-4 mr-2 mt-0.5 flex-shrink-0" />
+                        <InfoCircle className="h-4 w-4 mr-2 mt-0.5 flex-shrink-0"/>
                         購入後すぐにサーバーへの接続が可能になります。ただし、チケットは購入後から翌朝3時までの期間のみ有効です。
                     </p>
                 </div>
@@ -465,7 +498,7 @@ function TermsDialog({
                 >
                     {isLoading ? (
                         <>
-                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                            <Loader2 className="mr-2 h-4 w-4 animate-spin"/>
                             処理中...
                         </>
                     ) : (

@@ -22,61 +22,73 @@ export default function TermsPage() {
 
                 <div className="space-y-6">
                     <div className="border-b pb-4">
-                        <h2 className="text-lg font-semibold mb-2">販売事業者</h2>
-                        <p>T-Project</p>
+                        <h2 className="text-lg font-semibold mb-2">販売業者</h2>
+                        <p>T-Project（ティー・プロジェクト）</p>
                     </div>
 
                     <div className="border-b pb-4">
-                        <h2 className="text-lg font-semibold mb-2">代表者</h2>
+                        <h2 className="text-lg font-semibold mb-2">運営統括責任者</h2>
                         <p>とどめん</p>
                     </div>
 
                     <div className="border-b pb-4">
                         <h2 className="text-lg font-semibold mb-2">所在地</h2>
-                        <p>東京都港区</p>
+                        <p>※ご請求があった際には遅滞なく開示いたします。</p>
                     </div>
 
                     <div className="border-b pb-4">
-                        <h2 className="text-lg font-semibold mb-2">連絡先</h2>
-                        <p>メールアドレス: support@tproject.jp</p>
+                        <h2 className="text-lg font-semibold mb-2">電話番号</h2>
+                        <p>※ご請求があった際には遅滞なく開示いたします。</p>
+                    </div>
+
+                    <div className="border-b pb-4">
+                        <h2 className="text-lg font-semibold mb-2">メールアドレス</h2>
+                        <p>support@tproject.jp</p>
+                    </div>
+
+                    <div className="border-b pb-4">
+                        <h2 className="text-lg font-semibold mb-2">販売URL</h2>
+                        <p>https://sfw.tproject.jp</p>
                     </div>
 
                     <div className="border-b pb-4">
                         <h2 className="text-lg font-semibold mb-2">販売価格</h2>
-                        <p>販売ページに表示されている金額</p>
-                        <p>一般チケット: 330円/日（税込）</p>
-                        <p>ゴールドチケット: 1,000円/日（税込）</p>
+                        <p>各商品ページをご参照ください。</p>
                     </div>
 
                     <div className="border-b pb-4">
-                        <h2 className="text-lg font-semibold mb-2">商品の内容</h2>
-                        <p>ステラフィルワールド（Minecraftサーバー）への参加権利（デジタルコンテンツ）</p>
-                        <p>有効期間: 購入日の正午12時から翌日午前3時まで</p>
+                        <h2 className="text-lg font-semibold mb-2">商品代金以外の必要料金</h2>
+                        <p>消費税、銀行振込手数料、インターネット接続に伴う通信費など</p>
                     </div>
 
                     <div className="border-b pb-4">
                         <h2 className="text-lg font-semibold mb-2">支払方法</h2>
-                        <p>クレジットカード決済（Stripe決済システムを利用）</p>
-                        <p>対応カード: Visa, Mastercard, American Express, JCB, Discover, Diners Club</p>
+                        <p>クレジットカード、銀行振込</p>
                     </div>
 
                     <div className="border-b pb-4">
-                        <h2 className="text-lg font-semibold mb-2">商品の引き渡し時期</h2>
-                        <p>決済完了後、即時に利用可能となります。</p>
-                        <p>ただし、アクセス権は購入日の正午12時から有効となります。</p>
+                        <h2 className="text-lg font-semibold mb-2">支払時期</h2>
+                        <p>ご注文確定時にお支払いが確定します。</p>
                     </div>
 
                     <div className="border-b pb-4">
-                        <h2 className="text-lg font-semibold mb-2">返品・キャンセルについて</h2>
-                        <p>デジタルコンテンツという商品の特性上、購入後のキャンセルや返品・返金には応じられません。</p>
-                        <p>サーバーメンテナンスや障害等によりサービスをご利用いただけない場合は、別途対応いたします。</p>
+                        <h2 className="text-lg font-semibold mb-2">商品の引渡時期</h2>
+                        <p>決済確認後、即時利用可能。</p>
                     </div>
 
-                    <div>
-                        <h2 className="text-lg font-semibold mb-2">その他の注意事項</h2>
-                        <p>本サービスを利用するには、正規版のMinecraftが必要です。</p>
-                        <p>サーバー内でのルール違反やゲームプレイに支障をきたす行為が確認された場合、アクセス権を停止する場合があります。その場合の返金はいたしかねます。</p>
-                        <p>未成年の方がご購入される場合は、必ず保護者の同意を得てください。</p>
+                    <div className="border-b pb-4">
+                        <h2 className="text-lg font-semibold mb-2">返品・キャンセル</h2>
+                        <p>商品の性質上、返品・キャンセルはお受けしておりません。 ただし、データの不具合等がある場合には、再配布等の対応をさせていただきます。</p>
+                    </div>
+
+                    <div className="border-b pb-4">
+                        <h2 className="text-lg font-semibold mb-2">動作環境</h2>
+                        <p>Minecraft Java Edition 1.21.1以上。 必要MOD等の詳細はT-Project公式Discordをご参照ください。</p>
+                    </div>
+
+                    <div className="border-b pb-4">
+                        <h2 className="text-lg font-semibold mb-2">特別条件</h2>
+                        <p>18歳未満の方は、保護者の同意を得た上でご利用ください。</p>
                     </div>
                 </div>
             </div>
