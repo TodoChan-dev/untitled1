@@ -11,7 +11,7 @@ export async function POST(request: NextRequest) {
     try {
         // Parse request body
         const body = await request.json();
-        const { playerName, email, ticketType } = body;
+        const { playerName, email, ticketType }: { playerName: string; email: string; ticketType: keyof typeof TICKET_PRICES } = body;
 
         // Validate player name
         if (!playerName || !isValidMinecraftUsername(playerName)) {
@@ -20,6 +20,7 @@ export async function POST(request: NextRequest) {
                 { status: 400 }
             );
         }
+
         // Validate email
         if (!email || !email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
             return NextResponse.json(
@@ -29,7 +30,7 @@ export async function POST(request: NextRequest) {
         }
 
         // Validate ticket type
-        if (!ticketType || !['regular', 'gold'].includes(ticketType)) {
+        if (!ticketType || !(ticketType in TICKET_PRICES)) {
             return NextResponse.json(
                 { success: false, message: '無効なチケットタイプです' },
                 { status: 400 }
@@ -58,12 +59,11 @@ export async function POST(request: NextRequest) {
         });
 
         // Save transaction to database
-
         await createTransaction({
             playerName,
             email,
             ticketType,
-            amount: TICKET_PRICES[ticketType as 'regular' | 'gold'],
+            amount: TICKET_PRICES[ticketType],
             stripeSessionId: session.id,
             startTime,
             endTime,
