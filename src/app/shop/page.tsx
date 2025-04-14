@@ -138,12 +138,12 @@ export default function ShopPage() {
                     <div className="flex flex-col gap-6">
                         <div className="bg-yellow-50 p-4 rounded-md border border-yellow-200">
                             <h3 className="flex items-center text-amber-800 font-medium">
-                                <Clock className="h-5 w-5 mr-2 text-amber-600" />
+                                <Clock className="h-5 w-5 mr-2 text-amber-600"/>
                                 参加時間について
                             </h3>
                             <p className="mt-2 text-amber-700 text-sm">
-                                チケットの有効期間は購入日の正午(12:00)から翌朝3:00までの15時間です。
-                                この時間外はサーバーにアクセスできなくなりますのでご注意ください。
+                                チケットの有効期間は、購入時刻が正午前なら正午(12:00)から、正午以降なら購入時刻から始まり、
+                                いずれの場合も翌朝3:00に終了します。この時間外はサーバーにアクセスできなくなりますのでご注意ください。
                             </p>
                         </div>
 
@@ -167,9 +167,9 @@ export default function ShopPage() {
                                     disabled={isCheckingPlayer || playerName.length < 3}
                                 >
                                     {isCheckingPlayer ? (
-                                        <Loader2 className="h-4 w-4 animate-spin mr-2" />
+                                        <Loader2 className="h-4 w-4 animate-spin mr-2"/>
                                     ) : (
-                                        <Check className="h-4 w-4 mr-2" />
+                                        <Check className="h-4 w-4 mr-2"/>
                                     )}
                                     確認
                                 </Button>
@@ -178,7 +178,8 @@ export default function ShopPage() {
                             {/* Player Avatar Preview */}
                             {playerAvatar && playerExists !== false && (
                                 <div className="mt-4 flex items-center">
-                                    <div className="relative w-16 h-16 mr-4 rounded-lg overflow-hidden border-2 border-gray-200">
+                                    <div
+                                        className="relative w-16 h-16 mr-4 rounded-lg overflow-hidden border-2 border-gray-200">
                                         <Image
                                             src={playerAvatar}
                                             alt={`${playerName}のアバター`}
@@ -191,7 +192,7 @@ export default function ShopPage() {
                                         <p className="font-medium">{playerName}</p>
                                         {playerExists === true && (
                                             <p className="text-green-600 text-sm flex items-center">
-                                                <Check className="h-3 w-3 mr-1" />
+                                                <Check className="h-3 w-3 mr-1"/>
                                                 有効なアカウントです
                                             </p>
                                         )}
@@ -200,7 +201,8 @@ export default function ShopPage() {
                             )}
                         </div>
 
-                        <Tabs defaultValue="regular" className="mt-6" onValueChange={(value) => handleTicketSelect(value as 'regular' | 'gold')}>
+                        <Tabs defaultValue="regular" className="mt-6"
+                              onValueChange={(value) => handleTicketSelect(value as 'regular' | 'gold')}>
                             <TabsList className="grid w-full grid-cols-2">
                                 <TabsTrigger value="regular">一般チケット</TabsTrigger>
                                 <TabsTrigger value="gold">ゴールドチケット</TabsTrigger>
@@ -209,7 +211,7 @@ export default function ShopPage() {
                                 <Card>
                                     <CardHeader>
                                         <CardTitle className="flex items-center">
-                                            <Shield className="h-5 w-5 mr-2 text-blue-500" />
+                                            <Shield className="h-5 w-5 mr-2 text-blue-500"/>
                                             一般チケット
                                         </CardTitle>
                                         <CardDescription>
@@ -224,22 +226,24 @@ export default function ShopPage() {
                                             </div>
                                             <div className="flex justify-between mt-2">
                                                 <span>参加時間</span>
-                                                <span>正午12:00〜翌朝3:00</span>
+                                                <span>購入時〜翌朝3:00</span>
                                             </div>
+
                                         </div>
                                         <ul className="mt-4 space-y-2">
-                                            <li className="flex items-start">
-                                                <Check className="h-4 w-4 mt-1 mr-2 text-green-500" />
+                                        <li className="flex items-start">
+                                                <Check className="h-4 w-4 mt-1 mr-2 text-green-500"/>
                                                 <span>サーバーへのフルアクセス</span>
                                             </li>
                                             <li className="flex items-start">
-                                                <Check className="h-4 w-4 mt-1 mr-2 text-green-500" />
+                                                <Check className="h-4 w-4 mt-1 mr-2 text-green-500"/>
                                                 <span>すべてのゲーム機能を利用可能</span>
                                             </li>
                                         </ul>
                                     </CardContent>
                                     <CardFooter>
-                                        <Dialog open={isDialogOpen && selectedTicket === 'regular'} onOpenChange={setIsDialogOpen}>
+                                        <Dialog open={isDialogOpen && selectedTicket === 'regular'}
+                                                onOpenChange={setIsDialogOpen}>
                                             <DialogTrigger asChild>
                                                 <Button className="w-full">購入する</Button>
                                             </DialogTrigger>
@@ -264,7 +268,7 @@ export default function ShopPage() {
                                 <Card>
                                     <CardHeader>
                                         <CardTitle className="flex items-center">
-                                            <Star className="h-5 w-5 mr-2 text-yellow-500" />
+                                            <Star className="h-5 w-5 mr-2 text-yellow-500"/>
                                             ゴールドチケット
                                         </CardTitle>
                                         <CardDescription>
@@ -272,39 +276,43 @@ export default function ShopPage() {
                                         </CardDescription>
                                     </CardHeader>
                                     <CardContent>
-                                        <div className="bg-gradient-to-r from-yellow-50 to-amber-50 p-4 rounded-md border border-yellow-200">
+                                        <div
+                                            className="bg-gradient-to-r from-yellow-50 to-amber-50 p-4 rounded-md border border-yellow-200">
                                             <div className="flex justify-between">
                                                 <span>価格</span>
                                                 <span className="font-bold">1,000円/日</span>
                                             </div>
                                             <div className="flex justify-between mt-2">
                                                 <span>参加時間</span>
-                                                <span>正午12:00〜翌朝3:00</span>
+                                                <span>購入時〜翌朝3:00</span>
                                             </div>
+
                                         </div>
                                         <ul className="mt-4 space-y-2">
-                                            <li className="flex items-start">
-                                                <Check className="h-4 w-4 mt-1 mr-2 text-green-500" />
+                                        <li className="flex items-start">
+                                                <Check className="h-4 w-4 mt-1 mr-2 text-green-500"/>
                                                 <span>サーバーへのフルアクセス</span>
                                             </li>
                                             <li className="flex items-start">
-                                                <Check className="h-4 w-4 mt-1 mr-2 text-green-500" />
+                                                <Check className="h-4 w-4 mt-1 mr-2 text-green-500"/>
                                                 <span>すべてのゲーム機能を利用可能</span>
                                             </li>
                                             <li className="flex items-start">
-                                                <Star className="h-4 w-4 mt-1 mr-2 text-yellow-500" />
+                                                <Star className="h-4 w-4 mt-1 mr-2 text-yellow-500"/>
                                                 <span>ゲーム内で名前が目立ちます</span>
                                             </li>
                                             <li className="flex items-start">
-                                                <Star className="h-4 w-4 mt-1 mr-2 text-yellow-500" />
+                                                <Star className="h-4 w-4 mt-1 mr-2 text-yellow-500"/>
                                                 <span>公式サイトの支援者一覧に名前が掲載されます</span>
                                             </li>
                                         </ul>
                                     </CardContent>
                                     <CardFooter>
-                                        <Dialog open={isDialogOpen && selectedTicket === 'gold'} onOpenChange={setIsDialogOpen}>
+                                        <Dialog open={isDialogOpen && selectedTicket === 'gold'}
+                                                onOpenChange={setIsDialogOpen}>
                                             <DialogTrigger asChild>
-                                                <Button className="w-full bg-gradient-to-r from-yellow-500 to-amber-500 hover:from-yellow-600 hover:to-amber-600">
+                                                <Button
+                                                    className="w-full bg-gradient-to-r from-yellow-500 to-amber-500 hover:from-yellow-600 hover:to-amber-600">
                                                     購入する
                                                 </Button>
                                             </DialogTrigger>
@@ -332,7 +340,8 @@ export default function ShopPage() {
 
             <div className="text-center">
                 <p className="text-gray-500 text-sm">
-                    お問い合わせは <a href="mailto:support@tproject.jp" className="text-primary hover:underline">support@tproject.jp</a> までお願いします
+                    お問い合わせは <a href="mailto:support@tproject.jp"
+                                      className="text-primary hover:underline">support@tproject.jp</a> までお願いします
                 </p>
             </div>
         </div>
@@ -398,7 +407,7 @@ function TermsDialog({
                 <div className="bg-amber-50 p-3 rounded-md mb-4 border border-amber-200">
                     <p className="text-sm text-amber-800 flex items-start">
                         <InfoCircle className="h-4 w-4 mr-2 mt-0.5 flex-shrink-0" />
-                        購入後すぐにサーバーへの接続が可能になります。ただし、チケットは午後12時から翌朝3時までの期間のみ有効です。
+                        購入後すぐにサーバーへの接続が可能になります。ただし、チケットは購入後から翌朝3時までの期間のみ有効です。
                     </p>
                 </div>
 
