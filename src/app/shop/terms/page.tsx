@@ -5,6 +5,13 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ChevronLeft } from 'lucide-react';
 
+// Titleを特定商取引法に基づく表記にする
+import { Metadata } from 'next';
+export const metadata: Metadata = {
+    title: '特定商取引法に基づく表記 | ステラフィルワールド',
+    description: '特定商取引法に基づく表記',
+};
+
 export default function TermsPage() {
     return (
         <div className="container max-w-4xl mx-auto py-8 px-4">

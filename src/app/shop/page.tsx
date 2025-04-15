@@ -155,6 +155,13 @@ export default function ShopPage() {
                                 チケットの有効期間は、購入時刻が正午前なら正午(12:00)から、正午以降なら購入時刻から始まり、
                                 いずれの場合も翌朝3:00に終了します。この時間外はサーバーにアクセスできなくなりますのでご注意ください。
                             </p>
+                            {/*特定商取引法に関する表記にかんする情報*/}
+                            <p className="mt-2 text-red-700 text-sm">
+                                <Link href="/shop/terms" target="_blank" className="text-primary hover:underline">
+                                    特定商取引法に関する表記
+                                </Link>
+                                をご確認の上、購入手続きを行ってください。
+                            </p>
                         </div>
 
                         <div>
