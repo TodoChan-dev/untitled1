@@ -28,12 +28,12 @@ export default function TermsPage() {
 
                     <div className="border-b pb-4">
                         <h2 className="text-lg font-semibold mb-2">運営統括責任者</h2>
-                        <p>とどめん</p>
+                        <p>櫻井 汐音</p>
                     </div>
 
                     <div className="border-b pb-4">
                         <h2 className="text-lg font-semibold mb-2">所在地</h2>
-                        <p>※ご請求があった際には遅滞なく開示いたします。</p>
+                        <p>神奈川県大和市<br/>※ご請求があった際には遅滞なく開示いたします。</p>
                     </div>
 
                     <div className="border-b pb-4">
