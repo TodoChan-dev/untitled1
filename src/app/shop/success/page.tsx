@@ -128,7 +128,7 @@ function SuccessContent() {
                                 ホワイトリストに登録されました！
                             </p>
                             <p className="text-sm text-green-700">
-                                サーバーアドレス: <strong>sfw.tproject.jp</strong> にアクセスしてください。
+                                サーバーアドレス: <strong>sfw00.tproject.jp</strong> にアクセスしてください。
                             </p>
                         </div>
 
